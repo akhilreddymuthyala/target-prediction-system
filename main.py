@@ -21,14 +21,21 @@ for t in time:
     x_position.append(xt)
     y_position.append(yt) 
 
+t_max_height = vy / g
+x_max_height = vx * t_max_height
+y_max_height = y0 + vy * t_max_height - 0.5 * g * t_max_height**2   
+
 print(f"Total Distance Traveled: {math.sqrt(x_position[-1]*2 + y_position[-1]*2):.2f} m")
 print(f"Flight Time: {flight:.2f} seconds")
+print(f"Maximum Height: {y_max_height:.2f} meters")
 
-plt.plot(x_position,y_position, color = "black", label = "Target Motion curve")
+plt.title("Target prediction System")
+
+plt.plot(x_position,y_position, color = "black", label = "Target Motion curve") #curve
 
 plt.scatter([x0],[y0], color = "green", label = "Launch point")
-plt.scatter([x_position[len(x_position)//2]],[y_position[len(y_position)//2]], color = "orange", label = "Max height")
-plt.scatter(x_position[-1],[-1], color = "red", label = "Impact point")
+plt.scatter(x_max_height,y_max_height, color = "orange", label = "Max height")
+plt.scatter(x_position[-1],0, color = "red", label = "Impact point")
 plt.legend()
 
 plt.xlabel("Horizontal Distance")
